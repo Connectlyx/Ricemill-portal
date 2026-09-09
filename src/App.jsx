@@ -108,7 +108,7 @@ function TopBar({ title, onBack, onLogout, roleLabel }) {
     <div style={{ background: "#fff", borderBottom: `1px solid ${COLORS.line}`, padding: "16px 5vw", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
         {onBack && <button onClick={onBack} style={{ width: 38, height: 38, borderRadius: "50%", background: "#EAF3FD", border: "none", fontSize: 18, cursor: "pointer", color: COLORS.blueDeep }}>←</button>}
-        <img src="/connectlyx-logo.png" alt="Connectlyx" style={{ height: 22, display: "block" }} />
+        <div style={{ fontSize: 12, fontWeight: 700, color: COLORS.purple, letterSpacing: 0.3 }}>Connectlyx</div>
         <div style={{ width: 1, height: 22, background: COLORS.line }} />
         <div>
           <h2 style={{ fontSize: 18, fontWeight: 700, margin: 0 }}>{title}</h2>
@@ -146,7 +146,7 @@ function LoginScreen({ onLogin }) {
   return (
     <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: gradient, padding: 20 }}>
       <div style={{ background: "#fff", borderRadius: 20, padding: "44px 36px", width: "100%", maxWidth: 400, textAlign: "center", boxShadow: "0 20px 50px rgba(20,20,60,0.25)" }}>
-        <img src="/connectlyx-logo.png" alt="Connectlyx" style={{ height: 34, marginBottom: 22 }} />
+        <div style={{ fontSize: 13, fontWeight: 700, color: COLORS.purple, letterSpacing: 0.3, marginBottom: 22 }}>Powered by Connectlyx</div>
         <div style={{ width: 64, height: 64, background: "#EAF3FD", borderRadius: 16, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 18px", fontSize: 30 }}>🌾</div>
         <h2 style={{ fontSize: 22, marginBottom: 6 }}>Rice Mill Login</h2>
         <div style={{ color: COLORS.muted, fontSize: 14, marginBottom: 24 }}>Enter the details we gave you</div>
@@ -160,7 +160,18 @@ function LoginScreen({ onLogin }) {
         </div>
         {error && <div style={{ color: COLORS.red, fontSize: 13, textAlign: "left", marginBottom: 10 }}>{error}</div>}
         <PrimaryButton onClick={handleLogin} style={{ width: "100%", padding: 15, fontSize: 16, marginTop: 8 }}>Log In</PrimaryButton>
-        <div style={{ marginTop: 20, fontSize: 13, color: COLORS.muted }}>Forgot your password? Call support: 0300-0000000</div>
+        <div
+          onClick={() => window.open(`https://wa.me/923368814666?text=${encodeURIComponent("Hi, I forgot my password for the Rice Mill Portal, please help me reset it.")}`, "_blank")}
+          style={{ marginTop: 20, fontSize: 13, color: COLORS.blueDeep, cursor: "pointer", fontWeight: 600 }}
+        >
+          Forgot your password? Tap here
+        </div>
+        <div
+          onClick={() => window.open("https://wa.me/923368814666", "_blank")}
+          style={{ marginTop: 14, display: "flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "11px 16px", borderRadius: 999, background: COLORS.greenBg, color: COLORS.green, fontWeight: 700, fontSize: 13, cursor: "pointer" }}
+        >
+          💬 WhatsApp / Call Support: +92 336 8814666
+        </div>
       </div>
     </div>
   );
