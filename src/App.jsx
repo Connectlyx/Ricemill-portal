@@ -108,6 +108,8 @@ function TopBar({ title, onBack, onLogout, roleLabel }) {
     <div style={{ background: "#fff", borderBottom: `1px solid ${COLORS.line}`, padding: "16px 5vw", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
         {onBack && <button onClick={onBack} style={{ width: 38, height: 38, borderRadius: "50%", background: "#EAF3FD", border: "none", fontSize: 18, cursor: "pointer", color: COLORS.blueDeep }}>←</button>}
+        <img src="/connectlyx-logo.png" alt="Connectlyx" style={{ height: 22, display: "block" }} />
+        <div style={{ width: 1, height: 22, background: COLORS.line }} />
         <div>
           <h2 style={{ fontSize: 18, fontWeight: 700, margin: 0 }}>{title}</h2>
         </div>
@@ -144,6 +146,7 @@ function LoginScreen({ onLogin }) {
   return (
     <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: gradient, padding: 20 }}>
       <div style={{ background: "#fff", borderRadius: 20, padding: "44px 36px", width: "100%", maxWidth: 400, textAlign: "center", boxShadow: "0 20px 50px rgba(20,20,60,0.25)" }}>
+        <img src="/connectlyx-logo.png" alt="Connectlyx" style={{ height: 34, marginBottom: 22 }} />
         <div style={{ width: 64, height: 64, background: "#EAF3FD", borderRadius: 16, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 18px", fontSize: 30 }}>🌾</div>
         <h2 style={{ fontSize: 22, marginBottom: 6 }}>Rice Mill Login</h2>
         <div style={{ color: COLORS.muted, fontSize: 14, marginBottom: 24 }}>Enter the details we gave you</div>
@@ -209,6 +212,7 @@ function DashboardScreen({ orders, staff, deliveries, role, userName, onNavigate
           </div>
         ))}
       </div>
+      <div style={{ textAlign: "center", padding: "0 5vw 90px", fontSize: 12, color: COLORS.muted }}>Powered by Connectlyx</div>
       <div onClick={() => onNavigate("assistant")} style={{ position: "fixed", bottom: 24, right: 24, width: 56, height: 56, borderRadius: "50%", background: gradient, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 26, color: "#fff", cursor: "pointer", boxShadow: "0 8px 20px rgba(106,47,199,0.35)" }}>💬</div>
     </div>
   );
