@@ -123,9 +123,22 @@ function TopBar({ title, onBack, onLogout, roleLabel }) {
 function LoginScreen({ onLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const quickLogin = (role) => {
-    onLogin(role, role === "owner" ? "Malik Sahab (Owner)" : "Operator");
+  // Temporary demo credentials until Supabase real accounts are connected (Step 6).
+  const ACCOUNTS = {
+    "owner": { password: "owner123", role: "owner", name: "Malik Sahab (Owner)" },
+    "operator": { password: "operator123", role: "operator", name: "Operator" },
+  };
+
+  const handleLogin = () => {
+    const account = ACCOUNTS[username.trim().toLowerCase()];
+    if (!account || account.password !== password) {
+      setError("Incorrect username or password.");
+      return;
+    }
+    setError("");
+    onLogin(account.role, account.name);
   };
 
   return (
@@ -133,21 +146,17 @@ function LoginScreen({ onLogin }) {
       <div style={{ background: "#fff", borderRadius: 20, padding: "44px 36px", width: "100%", maxWidth: 400, textAlign: "center", boxShadow: "0 20px 50px rgba(20,20,60,0.25)" }}>
         <div style={{ width: 64, height: 64, background: "#EAF3FD", borderRadius: 16, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 18px", fontSize: 30 }}>🌾</div>
         <h2 style={{ fontSize: 22, marginBottom: 6 }}>Rice Mill Login</h2>
-        <div style={{ color: COLORS.muted, fontSize: 14, marginBottom: 24 }}>Enter your details, or use a demo account below</div>
+        <div style={{ color: COLORS.muted, fontSize: 14, marginBottom: 24 }}>Enter the details we gave you</div>
         <div style={{ textAlign: "left", marginBottom: 14 }}>
           <label style={{ fontSize: 14, fontWeight: 600, display: "block", marginBottom: 6 }}>Username</label>
-          <input value={username} onChange={(e) => setUsername(e.target.value)} placeholder="e.g. malikrice01" style={{ width: "100%", padding: 14, border: `1.5px solid ${COLORS.line}`, borderRadius: 12, fontSize: 16 }} />
+          <input value={username} onChange={(e) => setUsername(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleLogin()} placeholder="e.g. owner" style={{ width: "100%", padding: 14, border: `1.5px solid ${COLORS.line}`, borderRadius: 12, fontSize: 16 }} />
         </div>
-        <div style={{ textAlign: "left", marginBottom: 16 }}>
+        <div style={{ textAlign: "left", marginBottom: 8 }}>
           <label style={{ fontSize: 14, fontWeight: 600, display: "block", marginBottom: 6 }}>Password</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" style={{ width: "100%", padding: 14, border: `1.5px solid ${COLORS.line}`, borderRadius: 12, fontSize: 16 }} />
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleLogin()} placeholder="••••••••" style={{ width: "100%", padding: 14, border: `1.5px solid ${COLORS.line}`, borderRadius: 12, fontSize: 16 }} />
         </div>
-        <PrimaryButton onClick={() => quickLogin("owner")} style={{ width: "100%", padding: 15, fontSize: 16, marginBottom: 10 }}>Log In</PrimaryButton>
-        <div style={{ fontSize: 12, color: COLORS.muted, margin: "16px 0 10px" }}>— Demo quick access —</div>
-        <div style={{ display: "flex", gap: 10 }}>
-          <button onClick={() => quickLogin("owner")} style={{ flex: 1, padding: 12, borderRadius: 12, border: `1.5px solid ${COLORS.line}`, background: "#fff", fontWeight: 700, fontSize: 13, cursor: "pointer", color: COLORS.blueDeep }}>👑 Owner Demo</button>
-          <button onClick={() => quickLogin("operator")} style={{ flex: 1, padding: 12, borderRadius: 12, border: `1.5px solid ${COLORS.line}`, background: "#fff", fontWeight: 700, fontSize: 13, cursor: "pointer", color: COLORS.purple }}>🧑‍💼 Operator Demo</button>
-        </div>
+        {error && <div style={{ color: COLORS.red, fontSize: 13, textAlign: "left", marginBottom: 10 }}>{error}</div>}
+        <PrimaryButton onClick={handleLogin} style={{ width: "100%", padding: 15, fontSize: 16, marginTop: 8 }}>Log In</PrimaryButton>
         <div style={{ marginTop: 20, fontSize: 13, color: COLORS.muted }}>Forgot your password? Call support: 0300-0000000</div>
       </div>
     </div>
